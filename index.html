@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio | Cris Lopez</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+    --bg: #190f1b;
+    --bg2: #241426;
+
+    /* PRIMARY ACCENTS */
+    --primary: #f9a1a9;   /* soft pink */
+    --secondary: #ffc9ce; /* baby blush */
+    --accent2: #2f41a2;   /* deep blue accent */
+
+    /* LIGHT PINK TONES */
+    --soft: #fdd6dd;
+    --rose: #e5a9bf;
+
+    /* TEXT */
+    --white: #ffffff;
+    --text: #f2e9f0;
+
+    /* BORDER */
+    --border: rgba(249, 161, 169, 0.2);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+    background: radial-gradient(
+        circle at top,
+        #2a162c 0%,
+        #190f1b 50%,
+        #120a13 100%
+    );
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: rgb(253, 196, 255);
+      backdrop-filter: blur(10px);
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; margin-left: auto;}
+    .nav-links a {
+      font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 7rem 4rem 4rem;
+      gap: 3rem;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 55% 60% at 75% 50%, rgba(212,175,55,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* text side */
+    .hero-text {
+      display: flex; flex-direction: column; justify-content: center;
+      animation: slideUp .8s .2s ease both;
+    }
+
+    /* circle photo */
+    .hero-photo {
+      display: flex; align-items: center; justify-content: center;
+      animation: fadeIn 1s .3s ease both;
+    }
+
+    .hero-photo-circle {
+    width: 360px;
+    height: 360px;
+
+    border-radius: 50%;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid rgba(249, 161, 169, 0.5);
+
+    box-shadow:
+        0 0 0 10px rgba(255, 201, 206, 0.08),
+        0 0 40px rgba(249, 161, 169, 0.25),
+        0 20px 60px rgba(0, 0, 0, 0.4);
+
+    transition: all 0.4s ease;
+    }
+
+    .hero-photo-circle:hover {
+    transform: scale(1.03);
+    box-shadow:
+        0 0 0 12px rgba(255, 201, 206, 0.15),
+        0 0 60px rgba(249, 161, 169, 0.45),
+        0 25px 70px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-photo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block; width: 32px; height: 1px;
+      background: var(--accent);
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 4.5vw, 4rem);
+      font-weight: 900; line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-name em {
+      font-style: italic; color: var(--accent);
+    }
+    .hero-desc {
+      font-size: 0.95rem; line-height: 1.8;
+      color: var(--muted); max-width: 380px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; text-decoration: none;
+      padding: 0.75rem 1.8rem; border-radius: 2px;
+      font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      transition: all .2s;
+    }
+    .btn-light {
+      background: var(--white); color: #000;
+    }
+    .btn-light:hover { background: var(--accent); }
+    .btn-outline {
+      border: 1px solid var(--border); color: var(--muted);
+    }
+    .btn-outline:hover { border-color: var(--white); color: var(--white); }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 5rem 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .section-header {
+      display: flex; align-items: center; gap: 1.2rem;
+      margin-bottom: 3rem;
+    }
+    .section-num {
+      font-size: 0.72rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700; color: var(--white);
+    }
+    .section-line {
+      flex: 1; height: 1px; background: var(--border);
+    }
+
+    /* ABOUT CARD */
+    #about {
+    background: var(--bg2);
+    }
+
+    .about-card {
+    background: linear-gradient(
+        135deg,
+        rgba(200,162,255,0.12),
+        rgba(255,214,234,0.08)
+    );
+
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    }
+
+    .about-card,
+    .skills-card,
+    .project-card-modern {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+
+    .about-bio {
+    color: var(--text);
+    line-height: 1.9;
+    font-size: 0.95rem;
+    }
+
+    .about-bio strong {
+    color: var(--primary);
+    }
+
+    /* SKILLS CARDS */
+    .skills-container{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:2rem;
+        margin-top:2rem;
+    }
+
+    .skills-card{
+        background: linear-gradient(
+            135deg,
+            rgba(200,162,255,.12),
+            rgba(255,214,234,.08)
+        );
+
+        border:1px solid var(--border);
+        border-radius:24px;
+        padding:2rem;
+
+        backdrop-filter:blur(10px);
+
+        transition:.3s;
+    }
+
+    .skills-card:hover{
+        transform:translateY(-5px);
+    }
+
+    .skills-card-title{
+        font-family:'Playfair Display', serif;
+        color:var(--white);
+        font-size:1.4rem;
+        margin-bottom:1.5rem;
+    }
+
+    .stack-grid{
+        display:flex;
+        flex-wrap:wrap;
+        gap:.8rem;
+    }
+
+    .stack-chip{
+        padding:.6rem 1rem;
+        border-radius:999px;
+
+        background:rgba(200,162,255,.12);
+
+        border:1px solid rgba(200,162,255,.25);
+
+        color:var(--secondary);
+        font-size:.8rem;
+    }
+
+    @media(max-width:768px){
+
+        .skills-container{
+            grid-template-columns:1fr;
+        }
+
+    }
+
+    /* SMALL LABEL */
+    .section-label {
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    font-size: .75rem;
+    margin-bottom: .8rem;
+    }
+
+    /* DIVIDER */
+    .divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--primary),
+        var(--secondary)
+    );
+    margin-bottom: 2rem;
+    border-radius: 999px;
+    }
+
+    /* STACK */
+    .stack-title {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+
+    font-family: 'Playfair Display', serif;
+    color: var(--white);
+    font-size: 1.4rem;
+    }
+
+    .stack-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .8rem;
+    }
+
+    .stack-chip {
+    padding: .6rem 1rem;
+    border-radius: 999px;
+
+    background: rgba(200,162,255,0.12);
+
+    border: 1px solid rgba(200,162,255,0.25);
+
+    color: var(--secondary);
+
+    font-size: .8rem;
+    transition: .3s;
+    }
+
+    .stack-chip:hover {
+    transform: translateY(-3px);
+
+    background: var(--primary);
+    color: #000;
+    }
+    /* ── SKILLS ── */
+    #skills { background: var(--bg); }
+    .skills-list {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .skill-cell {
+      background: var(--bg); padding: 1.8rem;
+      transition: background .2s;
+    }
+    .skill-cell:hover { background: var(--bg2); }
+    .skill-cell-name {
+      font-size: 0.9rem; font-weight: 500; color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+    .skill-cell-level {
+      font-size: 0.75rem; color: var(--muted);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .skill-dots { display: flex; gap: 4px; }
+    .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--border);
+    }
+    .dot.filled { background: var(--accent); }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--bg2); }
+    .project-card {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .project-visual img {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    display: block;
+    }
+    .project-visual-inner {
+      text-align: center; z-index: 1; position: relative;
+    }
+    .project-visual-label {
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .project-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(212,175,55,0.08) 0%, transparent 70%);
+    }
+    .project-info { padding: 2.8rem; }
+    .project-tag {
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1rem; display: block;
+    }
+    .project-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 700; color: var(--white);
+      line-height: 1.2; margin-bottom: 0.8rem;
+    }
+    .project-year {
+      font-size: 0.8rem; color: var(--muted); margin-bottom: 1.2rem;
+    }
+    .project-desc {
+      font-size: 0.88rem; line-height: 1.8; color: #888;
+      margin-bottom: 1.5rem;
+    }
+    .project-tech-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+    .tech-pill {
+      font-size: 0.72rem; letter-spacing: 0.08em;
+      border: 1px solid var(--border); color: var(--muted);
+      padding: 0.25rem 0.7rem; border-radius: 999px;
+    }
+
+    /*---*/
+    .project-card-modern {
+    background: linear-gradient(
+        135deg,
+        rgba(200,162,255,0.12),
+        rgba(255,214,234,0.08)
+    );
+
+    border: 1px solid var(--border);
+    border-radius: 24px;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    backdrop-filter: blur(12px);
+
+    overflow: hidden;
+
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+
+    width: 85%;          /* 👈 key: not full width */
+    max-width: 1000px;   /* 👈 prevents stretching too wide */
+    margin: 2rem auto;   /* 👈 centers the card */
+
+    transition: 0.3s ease;
+    }
+
+    .project-card-modern:hover {
+    transform: translateY(-5px);
+    }
+
+    .project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 280px;
+    }
+
+    .project-content {
+    padding: 2rem;
+    }
+
+    .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--white);
+    margin: 0.8rem 0;
+    }
+
+    .project-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    }
+
+    .project-desc {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    }
+
+    .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg); text-align: center; }
+    .contact-inner { max-width: 520px; margin: 0 auto; }
+    .contact-big {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900; line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+    .contact-big em { font-style: italic; color: var(--accent); }
+    .contact-sub {
+      font-size: 0.9rem; color: var(--muted);
+      line-height: 1.7; margin-bottom: 2.5rem;
+    }
+    .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 0.75rem 1.5rem; border-radius: 2px;
+      transition: all .2s;
+    }
+    .contact-link:hover { color: var(--white); border-color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 3rem;
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      font-size: 0.75rem; 
+      color: #444;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; text-align: center; }
+      .hero-text { align-items: center; }
+      .hero-eyebrow { justify-content: center; }
+      .hero-desc { text-align: center; }
+      .hero-photo { order: -1; }
+      .hero-photo-circle { width: 220px; height: 220px; }
+      .hero-text { padding: 0; }
+      section { padding: 3.5rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .project-card { grid-template-columns: 1fr 1.4fr; }
+      .project-visual { min-height: 100px; }
+      footer { padding: 1.2rem 1.5rem; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="#Home">Home</a></li>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact Me</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+   <section id="Home">
+  <div class="hero">
+
+    <!-- TEXT -->
+    <div class="hero-text">
+      <h1 class="hero-name">
+        <em>Introducing</em><br>Cristille Joy J. Lopez
+      </h1>
+      <p class="hero-desc">
+        <strong style="color:#f5f5f5; font-weight:500;"> Frontend Web Developer | Graphic Designer <br> | Digital Creator</strong>
+        <br>I bring ideas to life through design and development.
+        My work focuses on creating clean, modern,
+        and engaging digital experiences that connect with users.
+        I value simplicity, creativity, and purpose in everything
+        I build, whether it's a website, design, or digital concept.
+      </p>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero-photo">
+      <div class="hero-photo-circle">
+        <img src="profile.jpg" alt="Cristille Joy Lopez" />
+      </div>
+    </div>
+
+  </div>
+  </section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <p class="section-label">✦ About Me</p>
+    <div class="divider"></div>
+    <div class="about-card">
+      <p class="about-bio">
+        Hi! I'm <strong>Cristille Joy J. Lopez</strong>, a web developer,
+        graphic designer, and digital creator passionate about bringing ideas
+        to life through design and technology.<br/><br/>
+
+        I enjoy building visually appealing websites, creating engaging digital
+        content, and exploring new technologies that help transform concepts
+        into meaningful experiences. My passion lies in combining creativity
+        with functionality to create projects that are both beautiful and
+        user-friendly.<br/><br/>
+
+        Beyond development and design, I continuously seek opportunities to
+        learn and grow. I'm currently expanding my knowledge in
+        <strong>frontend development</strong> and <strong>UI/UX design</strong>, while working on
+        projects that showcase both creativity and technical skills.
+      </p>
+    </div>
+  </div>
+    <h2 class="section-title"><br>Technical Skills</h2>
+    <div class="skills-container">
+    <!-- LEFT CARD -->
+    <div class="skills-card">
+        <h3 class="skills-card-title">✦ Coding Skills</h3>
+        <div class="stack-grid">
+        <span class="stack-chip">HTML</span>
+        <span class="stack-chip">CSS</span>
+        <span class="stack-chip">JavaScript</span>
+        <span class="stack-chip">PHP</span>
+        <span class="stack-chip">Java</span>
+        <span class="stack-chip">SQL</span>
+        </div>
+    </div>
+    <!-- RIGHT CARD -->
+    <div class="skills-card">
+        <h3 class="skills-card-title">✦ Software Skills</h3>
+        <div class="stack-grid">
+        <span class="stack-chip">Clip Studio Paint</span>
+        <span class="stack-chip">Live2D</span>
+        <span class="stack-chip">Blender</span>
+        <span class="stack-chip">XAMMP</span>
+        <span class="stack-chip">Canva</span>
+        <span class="stack-chip">Adobe After Effects</span>
+        <span class="stack-chip">Adobe Primier</span>
+        <span class="stack-chip">Adobe Photoshop</span>
+        </div>
+    </div>
+    </div>
+    <div class="skills-container">
+    <!-- LEFT CARD -->
+    <div class="skills-card">
+        <h3 class="skills-card-title">✦ Tools</h3>
+
+        <div class="stack-grid">
+        <span class="stack-chip">XP-Pen Deco 01 V2</span>
+        </div>
+    </div>
+    <!-- RIGHT CARD -->
+    <div class="skills-card">
+        <h3 class="skills-card-title">✦ Language</h3>
+        <div class="stack-grid">
+        <span class="stack-chip">Cebuano (Native)</span>
+        <span class="stack-chip">Tagalog (Native)</span>
+        <span class="stack-chip">English (Fluent)</span>
+        <span class="stack-chip">Japanese (Basic Conversational)</span>
+        </div>
+    </div>
+    </div>
+</section>
+
+  <!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-grid">
+    <p class="section-label">✦ Projetcs</p>
+    <div class="divider"></div>
+    <!-- LEFT: Project 1 -->
+    <div class="project-card-modern">
+      <img src="jointrack.png" alt="Project Image" class="project-img">
+      <div class="project-content">
+        <h3 class="project-title">
+          JoinTrack: Joint Activity Monitoring System for Students and Organizations
+        </h3>
+        <p class="project-desc">
+          JoinTrack is a web-based system designed to organize and track group participation and activities in one platform.
+          It helps users easily manage involvement, improve coordination, and keep projects well-organized and updated in real time.
+        </p>
+        <div class="project-tech">
+          <span class="stack-chip">HTML</span>
+          <span class="stack-chip">CSS</span>
+          <span class="stack-chip">JavaScript</span>
+          <span class="stack-chip">PHP</span>
+          <span class="stack-chip">SQL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <h2 class="contact-big">Get In Touch<br><em>With Me!</em></h2>
+      <p class="contact-sub">
+        Interested to work with me?
+      </p>
+      <div class="contact-links">
+        <a href="mailto:villanuevabeamonique@gmail.com" class="contact-link">
+            ✉ Email Me
+        </a>
+        <a href="https://github.com/cristillejoylopez" target="_blank" class="contact-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+        </a>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Copyright © 2026 Cristille Joy J. Lopez</span>
+  </footer>
+
+</body>
+</html>
